@@ -50,6 +50,16 @@ def list_lab_part3(fruits):
 				break
 	print fruits
 
+def list_lab_part4(fruits):
+	copy_list = list(fruits)
+	for x in xrange(len(copy_list)):
+		reverse_item = copy_list[x][::-1]
+		copy_list.pop(x)
+		copy_list.insert(x, reverse_item)
+	fruits.pop()
+	print fruits
+	print copy_list
+
 
 
 if __name__ == "__main__":
@@ -57,3 +67,4 @@ if __name__ == "__main__":
 	fruits = list_lab_part1(fruits)
 	list_lab_part2(fruits)
 	list_lab_part3(fruits)
+	list_lab_part4(fruits)
