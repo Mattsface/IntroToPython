@@ -35,11 +35,20 @@ def list_lab_part2(fruits):
 	print fruits
 	fruits.pop()
 	print fruits
-	item = raw_input("What fruit do you want to remove?")
+	item = raw_input("What fruit do you want to remove? ")
 	remove_from_list(fruits, item)
 	print fruits
 
 def list_lab_part3(fruits):
+	for fruit in fruits:
+		while True:
+			answer = raw_input("Do you like %s? yes or no? " % fruit.lower())
+			if answer == "yes":
+				break
+			elif answer == "no":
+				fruits.remove(fruit)
+				break
+	print fruits
 
 
 
