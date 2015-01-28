@@ -11,12 +11,12 @@ def rot13(text, decode=True):
 	if decode:
 		try:
 			return codecs.decode(text, 'rot13')
-		else:
+		except:
 			print "Error decoding text"
 	else:
 		try:
 			return codecs.encode(text, 'rot13')
-		else: 
+		except: 
 			print "Error encoding text"
 
 
@@ -25,5 +25,8 @@ if __name__ == '__main__':
 	encrypted_text = "Zntargvp sebz bhgfvqr arne pbeare"
 	decoded_text = rot13(encrypted_text)
 	print decoded_text
-	assert (rot13(decoded_text, decode=False) == encrpyted_text)
+
+	# Tests
+	assert (rot13(decoded_text, decode=False) == encrypted_text)
+	assert (rot13(decoded_text) == encrypted_text)
 
