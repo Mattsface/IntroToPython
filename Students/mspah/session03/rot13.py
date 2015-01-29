@@ -24,9 +24,12 @@ def rot13(text, decode=True):
 if __name__ == '__main__':
 	encrypted_text = "Zntargvp sebz bhgfvqr arne pbeare"
 	decoded_text = rot13(encrypted_text)
+	bullshit = "bullshit"
 	print decoded_text
+	print rot13(decoded_text, decode=False)
 
 	# Tests
 	assert (rot13(decoded_text, decode=False) == encrypted_text)
-	assert (rot13(decoded_text) == encrypted_text)
+	assert (rot13(encrypted_text) == decoded_text)
+	
 
