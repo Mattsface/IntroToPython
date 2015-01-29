@@ -18,6 +18,26 @@ def main_menu():
 	else:
 		main_menu()
 
+
+def thank_you_list(doners):
+	print ""
+	print "Please review the following choices"
+	print "To list doners: type list"
+	print "To add a new doner: type the doners name"
+	print "To add a new donation to an existing doner, type the doners name"
+	result = raw_input("What do you want to do? ")
+
+	if result == "list":
+		print_doners(doners)
+		thank_you_list()
+		
+
+def print_doners(doners):
+	for doner in doners:
+		print "%s, ", % doner
+
+
+
 def main():
 	doners = [ "matt" = [ 2, 4 ], "kelly" = [ 1, 2, 3], "tom" = [ 2, 4 ], "mitch" = [ 3, 5, 6 ], "lisa" = [ 3, 4, 3] ]
 
