@@ -1,54 +1,116 @@
 #!/usr/bin/env python
 
+import sys
 
-
-
-# Use a nested list to hold customer information and how much they have donated 
-
-# create a function that creates the menu
+DONERS = [	("matt", [ 2, 4 ]),
+			("kelly", [ 1, 2, 3]),
+			("tom", [ 2, 4 ]), 
+			("mitch", [ 3, 5, 6 ]),
+			("lisa", [ 3, 4, 3 ])
+			]
 
 def main_menu():
 	print ""
 	print "What would you like to do?"
 	print "1. Send a Thank You"
 	print "2. Create a report"
-	result = raw_input("Please choose 1 or 2 ")
-	if result == "1" or result == "2":
+	print "3. Exit"
+	result = raw_input("Please choose 1, 2 or 3: ")
+	
+	if result == "1" or result == "2" or result == "3":
 		return result
 	else:
 		main_menu()
 
 
-def thank_you_list(doners):
+def thank_you_list():
 	print ""
 	print "Please review the following choices"
 	print "To list doners: type list"
 	print "To add a new doner: type the doners name"
 	print "To add a new donation to an existing doner, type the doners name"
-	result = raw_input("What do you want to do? ")
+	result = raw_input("What do you want to do? ").lower()
 
 	if result == "list":
-		print_doners(doners)
+		print_doners()
 		thank_you_list()
+			
+	for doner in DONERS:
+		if result == doner[0]:	
+			donation(result)
+	else:
+		DONERS.append((result, []))
+		donation(result)
 		
 
-def print_doners(doners):
-	for doner in doners:
-		print "%s, ", % doner
+def donation(user):
+	print ""
+	amount = int(raw_input("How much would like to donate %s? " % user))
+	if isinstance(amount, int):
+		for doner in DONERS:
+			if doner[0] == user:
+				doner[1].append(amount)
+			else:
+				continue
+	else:
+		donation(user)
+		
+	thank_you_email(user, amount)
+
+
+
+def print_doners():
+	print ""
+	for doner in DONERS:
+		print doner[0]
+
+
+def thank_you_email(user, amount):
+	print ""
+	print ""
+	print "to: %s@gmail.com" % user
+	print ""
+	print "Thank you for your donation %s" % user
+	print "The amount of %i will help dearly" % amount
+	print ""
+	print "Thanks,"
+	print "      Matthew Spah"
+	main()
+
+def create_report():
+	for doner in DONERS:
+		name = doner[0]
+		donations = doner[1]
+		average, total, total_donations = calc_average(donations)
+		print "Donater: %s Average Donation: %.02f Total Amount: %i Total Donations: %i" % (name, average, total_donations, total )
+	main()
+
+
+def calc_average(donations):
+	total_donations = 0.0
+	total = len(donations)
+	for n in donations:
+		total_donations = n + total_donations
+		
+	average = total_donations / total
+	return average, total, int(total_donations) 
 
 
 
 def main():
-	doners = [ "matt" = [ 2, 4 ], "kelly" = [ 1, 2, 3], "tom" = [ 2, 4 ], "mitch" = [ 3, 5, 6 ], "lisa" = [ 3, 4, 3] ]
-
-
-
-
-
-
-
-
+	result = main_menu()
+	if result == "1":
+		thank_you_list()
+	elif result == "2":
+		create_report()
+	elif result == "3":
+		sys.exit
 
 
 
 if __name__ == '__main__':
+	main()
+
+
+
+
