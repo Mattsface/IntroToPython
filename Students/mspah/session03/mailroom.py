@@ -22,14 +22,6 @@ def main_menu():
 	else:
 		main_menu()
 
-def safe_input(text):
-
-	try:
-		return raw_input(text)
-	except EOFError: 
-
-	except Keyboard Interupt: 
-
 
 def thank_you_list():
 	print ""
@@ -53,14 +45,18 @@ def thank_you_list():
 
 def donation(user):
 	print ""
-	amount = int(raw_input("How much would like to donate %s? " % user))
-	if isinstance(amount, int):
+
+
+	try:
+		amount = int(raw_input("How much would like to donate %s? " % user))
+		
 		for doner in DONERS:
 			if doner[0] == user:
 				doner[1].append(amount)
 			else:
 				continue
-	else:
+	except ValueError:
+		print "Donation must be a integer"
 		donation(user)
 		
 	thank_you_email(user, amount)
