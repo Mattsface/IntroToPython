@@ -22,6 +22,14 @@ def main_menu():
 	else:
 		main_menu()
 
+def safe_input(text):
+
+	try:
+		return raw_input(text)
+	except EOFError: 
+
+	except Keyboard Interupt: 
+
 
 def thank_you_list():
 	print ""
