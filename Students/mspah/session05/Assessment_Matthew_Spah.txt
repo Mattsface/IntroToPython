@@ -1,0 +1,55 @@
+Matthew Spah
+
+
+
+1.a)
+-4,-3,-1 = "It's negative!"
+0 = "Zero or less"
+1 = "Zero or more"
+3 = "Zero or more"
+4 = "Even number."
+
+1.b) There  is nothing to interesting about it, except the fact that you'll never hit that return staatement.
+if number >= 0: will match every odd number. 
+
+
+2.a)
+#!/usr/bin/env python
+
+
+def main():
+    for number in xrange(100, -1, -7):
+        print number
+
+
+if __name__ == "__main__":
+    main()
+
+3.a)
+
+	Line (a) will always run
+	Line (b) will run if line a doesn't throw an exception
+	line (c) will return getValue1() as long as it doesn't throw an exception
+
+	line (d) will run if there is an exception
+	line (e) will run if line d is successfull and will return a value if there is no exception in the function getValue2()
+
+	line(f) will only run if there is an exception in the try: and except: blocks because of the return statements within them
+
+	line (g) will run if line(f) runs :)
+
+
+3.b)
+
+	1.
+	doSomething1() -> doSomething2() -> return getValue1()
+	
+	2. 
+	There is an exception in the try: block so we move down to the except: block doSomeErrorHandling() -> return getValue2()
+
+	3. 
+	There is an exception in the try: block and the except: block:
+	doSomeCleanup() -> doSomething3()
+
+	4.  Nothing runs because doSomeCleanup() throws an exception
+
