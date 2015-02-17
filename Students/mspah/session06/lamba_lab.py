@@ -1,7 +1,5 @@
 #!/usr/bin/env python
 
-
-
 def main():
 
     the_list = function_builder(5)
