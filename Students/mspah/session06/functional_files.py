@@ -34,10 +34,10 @@ def scrub_file(filename, overwrite):
     new_file_name = filename + ".scrub"
     new_file = open(new_file_name, "w")
 
-    with open(filename) as fh:
-        for line in fh:
-            line = line.strip()
-            new_file.write(line)
+    file = open(filename, "r")
+
+    for line in map(str.strip, file):
+        print line
 
 
 if __name__ == "__main__":
