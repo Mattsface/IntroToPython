@@ -15,30 +15,52 @@ def main():
         print "Unable to locate file %s" % filename
         sys.exit(1)
 
-    overwrite = user_input()
+    new_file_name = user_input()
 
-    scrub_file(filename, overwrite)
+    scrub_file(filename, new_file_name)
 
 
 def user_input():
-    answer = raw_input("Do you want to overwrite the file Y/N ")
-    if answer is "Y":
-        return True
-    elif answer is "N":
-        return False
+    print "New output filename? (leave blank if you want to overwrite current file)"
+    new_file_name = raw_input(" ")
+    return new_file_name
+
+
+def scrub_file(filename, new_file_name):
+    """
+    scrub file of all leading and trailing whitespace
+    :param filename:
+    :param new_file_name:
+    :return:
+    """
+    if new_file_name:
+        old_file = open(filename, "r")
+        new_file = []
+        for line in map(str.strip, old_file):
+            new_file.append(line)
+
+        old_file.close()
+
+        the_scrubbed_file = open(new_file_name, "w")
+
+        for line in new_file:
+            the_scrubbed_file.write(line + '\n')
+
+        the_scrubbed_file.close()
     else:
-        print "Please answer with Y or N"
-        user_input()
+        old_file = open(filename, "r")
+        new_file = []
+        for line in map(str.strip, old_file):
+            new_file.append(line)
 
-def scrub_file(filename, overwrite):
-    new_file_name = filename + ".scrub"
-    new_file = open(new_file_name, "w")
+        old_file.close()
 
-    file = open(filename, "r")
+        the_scrubbed_file = open(filename, "w")
 
-    for line in map(str.strip, file):
-        print line
+        for line in new_file:
+            the_scrubbed_file.write(line + '\n')
 
+        the_scrubbed_file.close()
 
 if __name__ == "__main__":
     main()
