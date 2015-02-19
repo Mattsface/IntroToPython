@@ -1,11 +1,8 @@
 #!/usr/bin/env python
 
 class Element(object):
-
-
     tag = "html"
     indent = "  "
-
 
     def __init__(self, content=None):
         self.content = []
@@ -16,11 +13,18 @@ class Element(object):
     def append(self, new_content):
         self.content.append(new_content)
 
-    def render(self, file, ind=""):
+    def render_tag(self):
+        pass
 
-        file.write("<" + self.tag + ">")
-        file.write('\n')
-        for line in self.content:
-            file.write(self.indent + line)
-            file.write('\n')
-        file.write("</" + self.tag + ">")
+    def render(self, file, ind=""):
+        # trying to render this shit
+
+
+class Html(Element):
+    tag = "html"
+
+class Body(Element):
+    tag = "body"
+
+class P(Element):
+    tag = "p"

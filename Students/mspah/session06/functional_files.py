@@ -35,32 +35,25 @@ def scrub_file(filename, new_file_name):
     """
     if new_file_name:
         old_file = open(filename, "r")
-        new_file = []
-        for line in map(str.strip, old_file):
-            new_file.append(line)
-
+        contents = old_file.readlines()
         old_file.close()
 
         the_scrubbed_file = open(new_file_name, "w")
 
-        for line in new_file:
+        for line in map(str.strip, contents):
             the_scrubbed_file.write(line + '\n')
 
         the_scrubbed_file.close()
     else:
         old_file = open(filename, "r")
-        new_file = []
-        for line in map(str.strip, old_file):
-            new_file.append(line)
-
+        contents = old_file.readlines()
         old_file.close()
 
         the_scrubbed_file = open(filename, "w")
 
-        for line in new_file:
+        for line in map(str.strip, contents):
             the_scrubbed_file.write(line + '\n')
 
         the_scrubbed_file.close()
-
 if __name__ == "__main__":
     main()
