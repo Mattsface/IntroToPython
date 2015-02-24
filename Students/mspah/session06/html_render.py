@@ -48,6 +48,50 @@ class Element(object):
         html_file.write('\n')
 
 
+class OneLineTag(Element):
+    """
+    OneLineTag class
+    """
+
+    def render(self, html_file, indent=""):
+        html_file.write(self.render_tag(indent, closing=False))
+        for con in self.content:
+            try:
+                html_file.write(indent + self.indent + con)
+            except TypeError:
+                con.render(html_file, (indent + self.indent))
+
+        html_file.write(self.render_tag(indent))
+        html_file.write('\n')
+
+
+class SelfClosingTag(Element):
+    """
+    SelfClosingTag class
+
+    """
+
+    def render(self, html_file, indent=""):
+        html_file.write(self.render_tag(indent))
+        for con in self.content:
+            try:
+                html_file.write(indent + self.indent + con)
+            except TypeError:
+                con.render(html_file, (indent + self.indent))
+        html_file.write('\n')
+
+    def render_tag(self, indent="", self_closing=True):
+        """
+        Render a self closing tag
+        """
+
+        if self.attributes:
+            self.attributes = ''.join('{}="{}"'.format(key, val) for key, val in self.attributes.items())
+            return "{}{}</{} {}>".format(indent, self.indent, self.tag, self.attributes)
+
+        return "{}{}</{}>".format(indent, self.indent, self.tag)
+
+
 class Html(Element):
     tag = "html"
     indent = ""
@@ -69,16 +113,10 @@ class Title(OneLineTag):
     tag = "title"
 
 
-class OneLineTag(Element):
-    def render(self, html_file, indent=""):
-        html_file.write(self.render_tag(indent, closing=False))
-        for con in self.content:
-            try:
-                html_file.write(indent + self.indent + con)
-            except TypeError:
-                con.render(html_file, (indent + self.indent))
+class Hr(SelfClosingTag):
+    tag = "hr"
 
-        html_file.write(self.render_tag(indent))
-        html_file.write('\n')
 
+class Br(SelfClosingTag):
+    tag = "br"
 
